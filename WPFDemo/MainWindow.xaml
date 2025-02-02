@@ -5,23 +5,30 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPFDemo"
         mc:Ignorable="d"
-        Title="MainWindow" Height="300" Width="300">
-    <StackPanel Margin="5" Name="stackPannel1">
+        Title="ResourceDemo" Height="300" Width="300">
+    <!--我们把Resource定义在window中Window.Resource标签或者APP.Xaml中APPlication.Resource标签效果是一样的，找不到的时候会自动一层层往上找 -->
+    <!-- 用程序资源并非资源寻找的最后一站，如果应用程序中仍然不能找到，则会进入资源寻找的最后一阶段——系统资源-->
+    <StackPanel Margin="5" Name="stackPannel1">       
+        <!--在StackPanel层级中定义了一个自定义画刷资源-->
         <StackPanel.Resources>
             <ImageBrush x:Key="TileBrush" TileMode="Tile" ViewportUnits="Absolute" Viewport="0 0 30 30" ImageSource="Image\mark.png">
             </ImageBrush>
         </StackPanel.Resources>
+        <!--Button1-->
         <Button Height="30" Name="btn1" Margin="5" Content="使用静态资源" Foreground="Red" FontWeight="Bold">
+            <!--标签的方式使用静态资源ResourceKey="TileBrush"-->
             <Button.Background>
                 <StaticResource ResourceKey="TileBrush"/>
             </Button.Background>
         </Button>
-
+        <!--Button2-->
         <Button>
+            <!--使用事件响应的方式，动态设置Button的Resource属性-->
             <Button Height="30" Name="btn2" Margin="5" Content="改变画刷" Foreground="Red" FontWeight="Bold" Click="btn2_Click"/>
         </Button>
-
+        <!--Button3-->
         <Button>
+            <!--属性直接赋值的方式使用动态Resource-->
             <Button Height="30" Name="btn3" Margin="5" Background="{DynamicResource TileBrush}" Content="使用动态资源" Foreground="Red" FontWeight="Bold"/>
         </Button>
     </StackPanel>
